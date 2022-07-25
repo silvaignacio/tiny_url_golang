@@ -13,7 +13,7 @@ type petController struct {
 
 func (uc *petController) FindByUrl(c *gin.Context) *model.TinyUrl {
 	//TODO implement me
-	data, err := uc.userInteractor.FindByUrl(c.Query("url"))
+	data, err := uc.userInteractor.FindByUrl(c.Param("url"))
 	if err != nil {
 		panic("Error")
 	}

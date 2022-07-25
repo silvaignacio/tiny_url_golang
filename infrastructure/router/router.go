@@ -8,8 +8,8 @@ import (
 
 func NewRouter(e *gin.Engine, c controllers.AppController) *gin.Engine {
 
-	e.GET("/pets", func(ctx *gin.Context) { ctx.JSON(http.StatusOK, c.Pet.FindByUrl(ctx)) })
-	e.POST("/pets", func(ctx *gin.Context) {
+	e.GET("/:url", func(ctx *gin.Context) { ctx.JSON(http.StatusOK, c.Pet.FindByUrl(ctx)) })
+	e.POST("/", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, c.Pet.CreateShortUrl(ctx))
 	})
 	return e
