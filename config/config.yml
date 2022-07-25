@@ -10,4 +10,4 @@ database:
 
 server:
   address: 8081
-  baseUrl: dev.to
+  baseUrl: localhost

@@ -8,6 +8,10 @@ import (
 
 type petPresenter struct{}
 
+func (up *petPresenter) ResponseCreated(u *model.TinyUrl) *model.TinyUrl {
+	return u
+}
+
 func NewUserPresenter() presenter.PetPresenter {
 	return &petPresenter{}
 }

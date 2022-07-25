@@ -10,6 +10,22 @@ type userRepository struct {
 	db *gorm.DB
 }
 
+func (ur *userRepository) FindByUrl(u string) (*model.TinyUrl, error) {
+	finded := &model.TinyUrl{}
+	ur.db.Where(&model.TinyUrl{ShortUrl: u}).First(&finded)
+	return finded, nil
+}
+func (ur *userRepository) Create(u *model.TinyUrl) (*model.TinyUrl, error) {
+	//TODO implement me
+	err := ur.db.Create(&u).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return u, nil
+}
+
 func NewPetRepository(db *gorm.DB) repository.PetRepository {
 	return &userRepository{db}
 }
