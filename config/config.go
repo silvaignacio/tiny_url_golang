@@ -25,6 +25,7 @@ type config struct {
 	}
 	Server struct {
 		Address string
+		BaseUrl string
 	}
 }
 

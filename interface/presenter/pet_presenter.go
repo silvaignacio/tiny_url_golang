@@ -1,6 +1,7 @@
 package presenter
 
 import (
+	"pet-system/config"
 	"pet-system/domain/model"
 	"pet-system/usecase/presenter"
 )
@@ -12,8 +13,10 @@ func NewUserPresenter() presenter.PetPresenter {
 }
 
 func (up *petPresenter) ResponsePets(us []*model.TinyUrl) []*model.TinyUrl {
+	config.ReadConfig()
+
 	for _, u := range us {
-		u.ShortUrl = "Mr." + u.ShortUrl
+		u.ShortUrl = "http://" + config.C.Server.BaseUrl + "/" + u.ShortUrl
 	}
 	return us
 }

@@ -2,13 +2,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"log"
 	"pet-system/config"
 	"pet-system/infrastructure/datastore"
 	"pet-system/infrastructure/router"
 	"pet-system/registry"
-
-	"github.com/labstack/echo"
 )
 
 func main() {
@@ -17,11 +16,12 @@ func main() {
 	db := datastore.NewDB()
 	r := registry.NewRegistry(db)
 
-	e := echo.New()
-	e = router.NewRouter(e, r.NewAppController())
+	g := gin.Default()
+
+	e := router.NewRouter(g, r.NewAppController())
 
 	fmt.Println("Server listen at http://localhost" + ":" + config.C.Server.Address)
-	if err := e.Start(":" + config.C.Server.Address); err != nil {
+	if err := e.Run(":" + config.C.Server.Address); err != nil {
 		log.Fatalln(err)
 	}
 }

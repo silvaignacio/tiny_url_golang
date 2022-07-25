@@ -1,16 +1,14 @@
 package router
 
 import (
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/gin-gonic/gin"
+	"net/http"
 	"pet-system/interface/controllers"
 )
 
-func NewRouter(e *echo.Echo, c controllers.AppController) *echo.Echo {
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+func NewRouter(e *gin.Engine, c controllers.AppController) *gin.Engine {
 
-	e.GET("/pets", func(context echo.Context) error { return c.Pet.GetPet(context) })
+	e.GET("/pets", func(ctx *gin.Context) { ctx.JSON(http.StatusOK, c.Pet.GetPet(ctx)) })
 
 	return e
 }
